@@ -2,6 +2,7 @@ import * as WebSocket from "ws";
 import { mouse, left, right, up, down } from "@nut-tree/nut-js";
 import drawSquare from "./drawSquare";
 import drawRectangle from "./drawRectangle";
+import drawCircle from "./drawCircle";
 
 export default async function handleRequest(
   data: WebSocket.RawData
@@ -28,6 +29,9 @@ export default async function handleRequest(
       return `${operation}`;
     case "draw_rectangle":
       await drawRectangle(+px1, +px2);
+      return `${operation}`;
+    case "draw_circle":
+      await drawCircle(+px1);
       return `${operation}`;
     default:
       console.log("Invalid command");
