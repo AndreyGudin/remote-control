@@ -6,11 +6,9 @@
   "type": "module",
   "scripts": {
     "lint": "eslint . --ext .ts --fix",
-    "start:dev": "cross-env NODE_ENV=development MODE_ENV=single webpack --config ./webpack.config.js --watch",
-    "prod": "cross-env NODE_ENV=production webpack --config ./webpack.config.js",
-    "start:prod": "npm run prod && cross-env MODE_ENV=single node ./dist/server.cjs",
-    "start:multi": "npm run prod && cross-env MODE_ENV=multi node ./dist/server.cjs",
-    "test": "jest --verbose"
+    "start:dev": "cross-env NODE_ENV=development webpack --config ./webpack.config.cjs --watch",
+    "prod": "cross-env NODE_ENV=production webpack --config ./webpack.config.cjs",
+    "start:prod": "npm run prod && cross-env node ./dist/server.cjs"
   },
   "repository": {
     "type": "git",
@@ -25,6 +23,7 @@
   "devDependencies": {
     "@types/node": "^18.11.18",
     "@types/uuid": "^9.0.0",
+    "@types/ws": "^8.5.4",
     "@typescript-eslint/eslint-plugin": "^5.47.0",
     "@typescript-eslint/parser": "^5.47.0",
     "cross-env": "^7.0.3",
@@ -41,6 +40,8 @@
     "webpack-cli": "^5.0.1"
   },
   "dependencies": {
+    "@nut-tree/libnut": "^2.4.0",
+    "@nut-tree/libnut-win32": "^2.4.0",
     "@nut-tree/nut-js": "^3.0.0",
     "dotenv": "^16.0.3",
     "ws": "^8.12.0"

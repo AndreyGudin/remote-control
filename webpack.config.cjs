@@ -1,12 +1,11 @@
-import { resolve} from 'path';
-import url from "url";
-import NodemonPlugin from 'nodemon-webpack-plugin';
+const path = require('path');
+const url =require('url');
+const NodemonPlugin = require('nodemon-webpack-plugin');
 
 const devMode = process.env.NODE_ENV !== 'production' ? 'development' : 'production';
-const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
-export default {
-  entry: resolve(__dirname, './src/index.ts'),
+module.exports = {
+  entry: path.resolve(__dirname, './src/index.ts'),
   mode: devMode,
   target: 'node',
   module: {
@@ -23,12 +22,15 @@ export default {
   },
   output: {
     filename: 'server.cjs',
-    path: resolve(__dirname, './dist'),
+    path: path.resolve(__dirname, './dist'),
     clean: true,
     assetModuleFilename: 'assets/logo/[hash][ext][query]',
   },
   plugins: [
     new NodemonPlugin(),
+    new (require("webpack")).ExternalsPlugin("commonjs", [
+			"@nut-tree/nut-js"
+		])
   ],
   watchOptions: {
     ignored: './dist',
