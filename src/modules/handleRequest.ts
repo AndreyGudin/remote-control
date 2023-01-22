@@ -37,9 +37,7 @@ export default async function handleRequest(
       return `${operation}_${px1}`;
     case "prnt_scrn":
       const screenshot = await printScreen();
-      const stream = WebSocket.createWebSocketStream(websocket, { decodeStrings: false });
-      
-      return `${operation}`;
+      return `${operation} ${screenshot}`;
     default:
       console.log("Invalid command");
       return `Invalid command`;
