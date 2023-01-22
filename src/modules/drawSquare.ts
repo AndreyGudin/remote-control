@@ -1,4 +1,3 @@
-import * as WebSocket from "ws";
 import { mouse, left, right, up, down, Button } from "@nut-tree/nut-js";
 
 export default async function drawSquare(px:number) {

@@ -1,7 +1,6 @@
 import { mouse, Button, Point, right } from "@nut-tree/nut-js";
 
 export default async function drawCircle(r: number) {
-
   let currentPosition = await mouse.getPosition();
   let nextPosition = new Point(currentPosition.x, currentPosition.y);
   let angle, x1, y1 = 0;
