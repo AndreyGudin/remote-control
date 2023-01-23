@@ -3,6 +3,7 @@ import { WebSocketServer, createWebSocketStream } from "ws";
 import handleRequest from "./modules/handleRequest";
 
 const wss = new WebSocketServer({ port: 8080 });
+console.log('Remote Control Server started');
 wss.on("connection", function connection(ws) {
   ws.send("Connected");
   const stream = createWebSocketStream(ws, { decodeStrings: false });
@@ -11,5 +12,13 @@ wss.on("connection", function connection(ws) {
     const answer = await handleRequest(ws, request);
     stream.write(answer);
   })
+  ws.on('close',() => console.log('WebSocket connection closed'));
+});
 
+process.on("SIGINT", () => {
+  for(const client of wss.clients){
+    client.terminate();
+  }
+  wss.close();
+  console.log('WebSocket Closed');
 });
