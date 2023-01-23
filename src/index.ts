@@ -1,9 +1,9 @@
 import { WebSocketServer, createWebSocketStream } from "ws";
 
 import handleRequest from "./modules/handleRequest";
-
-const wss = new WebSocketServer({ port: 8080 });
-console.log('Remote Control Server started');
+const PORT=8080;
+const wss = new WebSocketServer({ port: PORT });
+console.log(`WebSocket Server started on port:${PORT}`);
 wss.on("connection", function connection(ws) {
   ws.send("Connected");
   const stream = createWebSocketStream(ws, { decodeStrings: false });
